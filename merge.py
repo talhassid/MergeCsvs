@@ -4,7 +4,6 @@ import sys
 
 class MergeCsvs():
     data = {}
-    relative_path = 'C:/Users/talha/PycharmProjects/MergeCsvs/'  # DEBUG
     headers_set = set()  # set of headers in the final csv file
     ID_HEADER = 'id'
 

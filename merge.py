@@ -1,4 +1,6 @@
 import csv
+import sys
+
 
 class MergeCsvs():
     data = {}
@@ -40,19 +42,6 @@ class MergeCsvs():
         for csv_file in csvs:
             self.update_data_of_single_file(input_file=csv_file)
 
-    def process_input(self, input_str):
-        """
-        Get string of csv files return list of strings.
-
-        :param input_str: string of csv files
-        :return: list of csv files , output file path
-        """
-        csv_list = input_str.split()
-        output_name = csv_list[0]
-        csv_list = csv_list[1:]
-        csv_list_ = [self.relative_path + csv_file for csv_file in csv_list]
-        return (csv_list_, self.relative_path + output_name)
-
     def add_empty_fields(self):
         """
         For each ID add missing headers with ' '
@@ -86,8 +75,9 @@ class MergeCsvs():
 
 
 if __name__ == '__main__':
+    input_str = sys.argv[1:]
     merger = MergeCsvs()
-    input_str = 'output.csv csv1.csv  csv2.csv  csv3.csv'
-    csv_list, output_file = merger.process_input(input_str)
+    csv_list = input_str [1:]
+    output_file = input_str[0]
     merger.merge_csvs(csv_list)
     merger.write_data_to_output_file(output_file)
